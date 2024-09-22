@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name"> الأخبار</string>
+    <string name="search">بحث</string>
+    <string name="news_image">صورة الخبر</string>
+    <string name="pick_your_category_of_interest">اختر التصنيف الذي يهمك</string>
+    <string name="business">الأعمال</string>
+    <string name="entertainment">الترفيه</string>
+    <string name="health">الصحة</string>
+    <string name="science">العلوم</string>
+    <string name="sports">الرياضة</string>
+    <string name="search_not_found">معذرة ، لم نستطع العثور على أخبار في هذا المصدر</string>
+    <string name="technology">التقنية</string>
+    <string name="news">تفاصيل الخبر</string>
+    <string name="categories">التصنيفات</string>
+    <string name="view_full_article">قراءة المزيد</string>
+    <string name="news_details">تفاصيل الخبر</string>
+    <string name="search_articles">ابحث في الأخبار</string>
+    <string name="close">إغلاق</string>
+    <string name="settings">الإعدادات</string>
+    <string name="language">اللغة</string>
+    <string name="can_t_find_articles">لم نستطع العثور على أخبار</string>
+    <string name="something_went_wrong">حصل خطأ ما</string>
+    <string name="connection_error">الرجاء التأكد من اتصالك بالانترنت ثم أعد المحاولة</string>
+    <string name="cancel">الغاء</string>
+    <string name="try_again">أعد المحاولة</string>
+    <string name="ok">OK</string>
+    <string name="error">Error</string>
+</resources>
