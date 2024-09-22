@@ -36,12 +36,16 @@ import com.example.news_compose_c40.R
 import com.example.news_compose_c40.widgets.NewsTopAppBar
 import kotlinx.coroutines.CoroutineScope
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.compose.ui.res.stringResource
+import com.example.news_compose_c40.activity.HomeActivity
 import kotlinx.serialization.Serializable
 
 @Serializable
 object SettingsRoute
+
+
 @Composable
 fun SettingsScreen(
     modifier: Modifier = Modifier,
@@ -135,6 +139,7 @@ fun DropDownMenu(modifier: Modifier, context: Context) {
 
                             // Set the app locale based on the selected language
                             setAppLocale(languageCode, context)
+                            restartApp(context)
                         },
                         contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
                     )
@@ -143,100 +148,6 @@ fun DropDownMenu(modifier: Modifier, context: Context) {
         }
     }
 }
-
-//@Composable
-//fun SettingsScreen(
-//    modifier: Modifier = Modifier,
-//    scope: CoroutineScope,
-//    drawerState: DrawerState,
-//) {
-//    Scaffold(topBar = {
-//        NewsTopAppBar(
-//            shouldDisplaySearchIcon = true,
-//            shouldDisplayMenuIcon = true,
-//            titleString = "Settings",
-//            scope = scope,
-//            drawerState = drawerState,
-//            onSearchClick = {
-//                // Show the search bar when the search icon is clicked
-//            }
-//        )
-//    }) { paddingValues ->
-//        DropDownMenu(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(paddingValues)
-//        )
-//    }
-//}
-//
-//
-//@OptIn(ExperimentalMaterial3Api::class)
-//@Composable
-//fun DropDownMenu(modifier: Modifier) {
-//    val language = listOf("English", "Arabic")
-//    var isExpanded by remember { mutableStateOf(false) }
-//    var selectedText by remember { mutableStateOf(language[0]) }
-//
-//    Column(
-//        modifier = modifier.paint(
-//            painterResource(id = R.drawable.bg_pattern),
-//            contentScale = ContentScale.Crop
-//        ),
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) {
-//        Text(
-//            text = "Language",
-//            modifier = Modifier
-//                .align(alignment = Alignment.Start)
-//                .padding(start = 30.dp, top = 30.dp, bottom = 20.dp)
-//        )
-//
-//        ExposedDropdownMenuBox(
-//            expanded = isExpanded,
-//            onExpandedChange = { isExpanded = !isExpanded }
-//        ) {
-//            TextField(
-//                modifier = Modifier
-//                    .menuAnchor()
-//                    .border(1.dp, Color.Green, shape = RoundedCornerShape(0.dp)) // Green border
-//                    .background(color = Color.White),
-//                value = selectedText,
-//                onValueChange = {},
-//                readOnly = true,
-//                trailingIcon = {
-//                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded)
-//                }
-//            )
-//            ExposedDropdownMenu(
-//                expanded = isExpanded,
-//                onDismissRequest = { isExpanded = false },
-//                modifier = Modifier
-//                    .background(Color.White) // Set background to white
-//                    .border(1.dp, Color.Green, shape = RoundedCornerShape(4.dp)) // Green border
-//                    .fillMaxWidth()
-//            ) {
-//                language.forEachIndexed { index, text ->
-//                    DropdownMenuItem(
-//                        text = { Text(text = text) },
-//                        onClick = {
-//                            selectedText = language[index]
-//                            isExpanded = false
-//
-//                            // Logic to change app language based on selection
-//                            when (text) {
-//                                "English" -> setAppLocale("en")
-//                                "Arabic" -> setAppLocale("ar")
-//                            }
-//                        },
-//                        contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
-//                    )
-//                }
-//            }
-//        }
-//        Text(text = "Currently Selected Language is $selectedText")
-//    }
-//}
 
 // Function to change the language of the app
 fun setAppLocale(languageCode: String, context: Context) {
@@ -264,4 +175,10 @@ fun saveLanguagePreference(context: Context, languageCode: String) {
 fun getSavedLanguage(context: Context): String? {
     val sharedPref: SharedPreferences = context.getSharedPreferences("app_settings", Context.MODE_PRIVATE)
     return sharedPref.getString("language", "en") // Default to English if not set
+}
+
+fun restartApp(context: Context) {
+    val intent = Intent(context, HomeActivity::class.java)
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+    context.startActivity(intent)
 }
